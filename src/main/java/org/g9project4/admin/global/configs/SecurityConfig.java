@@ -1,4 +1,4 @@
-package org.g9project4.global.configs;
+package org.g9project4.admin.global.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
