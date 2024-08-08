@@ -1,9 +1,14 @@
+<<<<<<< HEAD:src/main/java/org/g9project4/global/Utils.java
 package org.g9project4.global;
+=======
+package org.g9project4.admin.global;
+>>>>>>> 0694ea017b72880143ea0b0b2a75758e79b2496d:src/main/java/org/g9project4/admin/global/Utils.java
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+<<<<<<< HEAD:src/main/java/org/g9project4/global/Utils.java
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
@@ -86,4 +91,39 @@ public class Utils { // 빈의 이름 - utils
 
         return messages.isEmpty() ? code : messages.get(0);
     }
+=======
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+@RequiredArgsConstructor
+public class Utils {
+
+    private final DiscoveryClient discoveryClient;
+
+    private final HttpServletRequest request;
+
+    public String url(String url) {
+        List<ServiceInstance> instances = discoveryClient.getInstances("admin-service");
+
+        return String.format("%s%s", instances.get(0).getUri().toString(), url);
+    }
+    /*
+    public String redirectUrl(String url) {
+        List<ServiceInstance> instances = discoveryClient.getInstances("admin-service");
+        String fromGateway = request.getHeader("from-gateway");
+        if (StringUtils.hasText("fromGateway") && fromGateway.equals("true")) {
+            String host = request.getHeader("gateway-port");
+            String protocol = request.isSecure() ? "https://" : "http://";
+             url = protocol + host + "/admin" + url;
+        }
+
+        return "redirect:" + url;
+
+    }
+
+     */
+
+>>>>>>> 0694ea017b72880143ea0b0b2a75758e79b2496d:src/main/java/org/g9project4/admin/global/Utils.java
 }

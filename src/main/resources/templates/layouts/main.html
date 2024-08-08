@@ -3,8 +3,11 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <meta name="csrf_token" th:content="${_csrf.token}">
     <meta name="csrf_header" th:content="${_csrf.headerName}">
+=======
+>>>>>>> 0694ea017b72880143ea0b0b2a75758e79b2496d
     <title>
         <th:block th:if="${pageTitle != null}"
         th:text="${#strings.concat(pageTitle, ' - ')}"></th:block>
@@ -21,6 +24,7 @@
 </head>
 <body>
 <header th:replace="~{outlines/_header::common}"></header>
+<<<<<<< HEAD
 <main>
     <aside th:replace="~{outlines/_side::menus}"></aside>
     <section>
@@ -28,6 +32,10 @@
         <section  layout:fragment="content"></section>
     </section>
 </main>
+=======
+<main layout:fragment="content"></main>
+<footer th:replace="~{outlines/_footer::common}"></footer>
+>>>>>>> 0694ea017b72880143ea0b0b2a75758e79b2496d
 <iframe name="ifrmHidden" class="dn"></iframe>
 </body>
 </html>
