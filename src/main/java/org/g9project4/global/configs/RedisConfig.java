@@ -1,8 +1,4 @@
-<<<<<<< HEAD:src/main/java/org/g9project4/global/configs/RedisConfig.java
 package org.g9project4.global.configs;
-=======
-package org.g9project4.admin.global.configs;
->>>>>>> 0694ea017b72880143ea0b0b2a75758e79b2496d:src/main/java/org/g9project4/admin/global/configs/RedisConfig.java
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -39,8 +35,4 @@ public class RedisConfig {
         redisTemplate.setHashValueSerializer(new StringRedisSerializer());
         return redisTemplate;
     }
-<<<<<<< HEAD:src/main/java/org/g9project4/global/configs/RedisConfig.java
 }
-=======
-}
->>>>>>> 0694ea017b72880143ea0b0b2a75758e79b2496d:src/main/java/org/g9project4/admin/global/configs/RedisConfig.java
