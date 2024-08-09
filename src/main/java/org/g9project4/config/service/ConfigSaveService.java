@@ -15,7 +15,7 @@ public class ConfigSaveService {
     public void save(String code, Object data) {
         Configs configs = repository.findById(code).orElseGet(Configs::new);
 
-        ObjectMapper om = new ObjectMapper();
+        ObjectMapper om = new ObjectMapper(); // 자바 객체를 json 형식으로
         om.registerModule(new JavaTimeModule());
 
         try {

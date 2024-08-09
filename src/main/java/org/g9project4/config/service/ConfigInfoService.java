@@ -31,7 +31,7 @@ public class ConfigInfoService {
             return Optional.ofNullable(null);
         }
 
-        ObjectMapper om = new ObjectMapper();
+        ObjectMapper om = new ObjectMapper(); //ObjectMapper 는 JSON 문자열을 Java 객체로 변환해줌
         om.registerModule(new JavaTimeModule());
 
         String jsonString = config.getData();
