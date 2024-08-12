@@ -27,10 +27,11 @@ public class Pagination {
     private String baseURL; // 페이징 쿼리스트링 기본 URL
 
     /**
-     * @param page   : 현재 페이지
-     * @param total  : 전체 레코드 갯수
+     *
+     * @param page : 현재 페이지
+     * @param total : 전체 레코드 갯수
      * @param ranges : 페이지 구간 갯수
-     * @param limit  : 1페이지 당 레코드 갯수
+     * @param limit : 1페이지 당 레코드 갯수
      */
     public Pagination(int page, int total, int ranges, int limit, HttpServletRequest request) {
 
@@ -40,7 +41,7 @@ public class Pagination {
         limit = limit < 1 ? 20 : limit;
 
         // 전체 페이지 갯수
-        int totalPages = (int) Math.ceil(total / (double) limit);
+        int totalPages = (int)Math.ceil(total / (double)limit);
 
 
         // 구간 번호
@@ -104,7 +105,7 @@ public class Pagination {
 
 
         return IntStream.rangeClosed(firstRangePage, lastRangePage)
-                .mapToObj(p -> new String[]{String.valueOf(p),
+                .mapToObj(p -> new String[] { String.valueOf(p),
                         baseURL + "page=" + p})
                 .toList();
 
