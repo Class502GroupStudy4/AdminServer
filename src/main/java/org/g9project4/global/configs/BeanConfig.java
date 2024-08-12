@@ -23,6 +23,7 @@ public class BeanConfig {
         om.registerModule(new JavaTimeModule());
         return om;
     }
+    @Bean
     public RestTemplate restTemplate(){
         return new RestTemplate();
     }
