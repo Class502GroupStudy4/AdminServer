@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="xxxxhttp://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header th:fragment="common">
     <section class="logo_area">
-        <a th:href="${@utils.redirectUrl('/')}">로고</a>
+        <a th:href="*{@utils.redirectUrl('/')}">로고</a>
     </section>
     <section class="btn_area">
         <th:block sec:authorize="isAuthenticated()">

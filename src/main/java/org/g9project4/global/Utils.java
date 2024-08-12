@@ -95,6 +95,7 @@ public class Utils { // 빈의 이름 - utils
 
         return messages.isEmpty() ? code : messages.get(0);
     }
+
     /**
      * 요청 데이터 단일 조회 편의 함수
      *
