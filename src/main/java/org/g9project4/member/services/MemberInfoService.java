@@ -1,10 +1,22 @@
 package org.g9project4.member.services;
 
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.dsl.PathBuilder;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.persistence.EntityManager;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.constraints.Max;
 import lombok.RequiredArgsConstructor;
+import org.g9project4.adminmember.controllers.MemberSearch;
+import org.g9project4.global.ListData;
+import org.g9project4.global.Pagination;
 import org.g9project4.member.MemberInfo;
 import org.g9project4.member.constants.Authority;
 import org.g9project4.member.entities.Authorities;
 import org.g9project4.member.entities.Member;
+import org.g9project4.member.entities.QMember;
 import org.g9project4.member.repositories.MemberRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +31,8 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class MemberInfoService implements UserDetailsService {
     private final MemberRepository memberRepository;
+    private final HttpServletRequest request;
+    private final EntityManager em;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -39,5 +53,29 @@ public class MemberInfoService implements UserDetailsService {
                 .authorities(authorities)
                 .member(member)
                 .build();
+    }
+    public ListData<Member> getList(MemberSearch search){
+        int page = Math.max(search.getPage(), 1);
+        int limit = Math.max(search.getLimit(), 1);
+        int offset = (page - 1) * limit;
+        BooleanBuilder andBuilder = new BooleanBuilder();
+        QMember member = QMember.member;
+
+        PathBuilder<Member> pathBuilder = new PathBuilder<>(Member.class, "member");
+
+        List<Member> items = new JPAQueryFactory(em)
+                .selectFrom(member)
+                .leftJoin(member.authorities)
+                .fetchJoin()
+                .where(andBuilder)
+                .limit(limit)
+                .offset(offset)
+                .orderBy(new OrderSpecifier(Order.DESC,pathBuilder.get("createdAt")))
+                .fetch();
+
+        int total = (int)memberRepository.count(andBuilder);
+        Pagination pagination = new Pagination(page, total, 10 ,limit , request);
+        return new ListData<>(items, pagination);
+
     }
 }
