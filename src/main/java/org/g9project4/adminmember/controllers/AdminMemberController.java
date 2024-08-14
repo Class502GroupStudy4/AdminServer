@@ -2,8 +2,11 @@ package org.g9project4.adminmember.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.bouncycastle.math.raw.Mod;
 import org.g9project4.adminmember.constants.Authority;
+import org.g9project4.adminmember.services.MemberConfigDeleteService;
 import org.g9project4.adminmember.services.MemberConfigSaveService;
+import org.g9project4.board.services.BoardConfigDeleteService;
 import org.g9project4.global.ListData;
 import org.g9project4.global.Utils;
 import org.g9project4.global.exceptions.ExceptionProcessor;
@@ -27,6 +30,7 @@ public class AdminMemberController implements ExceptionProcessor {
     private final MemberInfoService infoService;
     private final MemberConfigSaveService memberConfigSaveService;
     private final Utils utils;
+    private final MemberConfigDeleteService memberConfigDeleteService;
 
     @ModelAttribute("menuCode")
     public String getMenuCode() {
@@ -64,6 +68,7 @@ public class AdminMemberController implements ExceptionProcessor {
 
 
 
+
     @PostMapping("/save")
     public String save(@Valid RequestMember form, Errors errors, Model model) {
         String mode = form.getMode();
@@ -76,6 +81,25 @@ public class AdminMemberController implements ExceptionProcessor {
 
         return "redirect:" + utils.redirectUrl("/manager/member");
 
+    }
+
+    @PostMapping("/delete/{seq}")
+    public String delete(@PathVariable("seq") Long seq , Model model) {
+        commonProcess("list", model);
+
+        memberConfigDeleteService.delete(seq);
+
+        return "redirect:" + utils.redirectUrl("/manager/member");
+    }
+
+    @DeleteMapping
+    public String deleteList(@RequestParam("chk") List<Integer> chks, Model model) {
+        commonProcess("list", model);
+
+      memberConfigDeleteService.deleteList(chks);
+
+        model.addAttribute("script", "parent.location.reload();");
+        return "common/_execute_script";
     }
 
 

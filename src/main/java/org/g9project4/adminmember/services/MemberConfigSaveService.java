@@ -32,4 +32,5 @@ public class MemberConfigSaveService {
 
         memberRepository.saveAndFlush(member);
     }
+
 }

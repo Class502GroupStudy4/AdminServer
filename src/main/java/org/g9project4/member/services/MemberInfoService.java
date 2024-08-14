@@ -61,6 +61,10 @@ public class MemberInfoService implements UserDetailsService {
         Member member = memberRepository.findById(seq).orElse(null);
         return member;
     }
+    public Member get(String email){
+        Member member = memberRepository.findByEmail(email).orElse(null);
+        return member;
+    }
     public RequestMember getForm(Long seq){
         Member member =get(seq);
         RequestMember form = new ModelMapper().map(member, RequestMember.class);
