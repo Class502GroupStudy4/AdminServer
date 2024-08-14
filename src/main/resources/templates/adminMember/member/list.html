@@ -4,6 +4,32 @@
       layout:decorate="~{/layouts/main}">
 <section layout:fragment="content">
     <h1>회원 목록</h1>
+    <h2>회원 조회</h2>
+    <form name="frmSearch" method="get" th:action="${@utils.redirectUrl('/manager/member')}" autocomplete="off" th:object="${memberSearch}">
+        <table class="table_cols AMember">
+            <tr>
+                <th>키워드</th>
+                <td>
+                    <div class="input_grp">
+                        <select name="sopt" th:field="*{sopt}">
+                            <option value="ALL" th:text="#{통합검색}">통합검색</option>
+                            <option value="USERNAME" th:text="#{이름}"></option>
+                            <option value="EMAIL" th:text="#{이메일}"></option>
+                            <option value="MOBILE" th:text="#{전화번호}"></option>
+                            <option value="AUTHORITY" th:text="#{권한}"></option>
+                        </select>
+                        <input type="text" name="skey" th:field="*{skey}">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="search_btn">
+            <button type="submit" class="btn">검색하기</button>
+        </div>
+    </form>
+
+
+    <h1>회원 목록</h1>
     <form name="frmList" method="post" th:action="${@utils.redirectUrl('/manager/member')}" target="ifrmProcess" autocomplete="off">
         <input type="hidden" name="_method" value="PATCH">
         <table class="table_rows">

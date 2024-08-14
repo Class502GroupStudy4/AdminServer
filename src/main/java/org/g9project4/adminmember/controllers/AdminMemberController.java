@@ -4,7 +4,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.adminmember.constants.Authority;
 import org.g9project4.adminmember.services.MemberConfigSaveService;
+import org.g9project4.board.entities.Board;
 import org.g9project4.global.ListData;
+import org.g9project4.global.Pagination;
 import org.g9project4.global.Utils;
 import org.g9project4.global.exceptions.ExceptionProcessor;
 import org.g9project4.member.entities.Member;
@@ -42,17 +44,20 @@ public class AdminMemberController implements ExceptionProcessor {
 
         return Authority.getList(); //enum 상수 String으로...
     }
+
+
+
     @GetMapping
     public String list(@ModelAttribute MemberSearch search, Model model) {
         commonProcess("list", model);
 
-        ListData<Member> data = infoService.getList(search);
-
+        ListData<Member> data = infoService.getSearchedMemberList(search);
         model.addAttribute("items", data.getItems()); // 목록
         model.addAttribute("pagination", data.getPagination()); // 페이징
 
         return "adminMember/member/list";
     }
+
     @GetMapping("/edit/{email}")
     public String edit(@PathVariable("email") String email, Model model) {
         commonProcess("edit",model);
