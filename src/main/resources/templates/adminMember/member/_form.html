@@ -12,12 +12,6 @@
             <div class="error" th:each="err : ${#fields.errors('userName')}" th:text="${err}"></div>
         </td>
     <tr>
-        <th>사용자 이메일</th>
-        <td>
-            <input type="text" name="userName" th:field="*{email}">
-
-            <div class="error" th:each="err : ${#fields.errors('userName')}" th:text="${err}"></div>
-        </td>
     <th>사용자 비밀번호</th>
     <td>
         <input type="text" name="userName" th:field="*{password}">
