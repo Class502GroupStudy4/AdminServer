@@ -3,6 +3,7 @@ package org.g9project4.member.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import org.g9project4.global.entities.BaseEntity;
+import org.g9project4.member.constants.Authority;
 
 import java.io.Serializable;
 import java.util.List;
@@ -26,6 +27,11 @@ public class Member extends BaseEntity implements Serializable {
 
     @Column(length=15,nullable = false)
     private String mobile;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length=20, nullable = false)
+    private Authority type = Authority.ALL; // 권한 설정 - 글쓰기
+
 
     @ToString.Exclude
     @OneToMany(mappedBy = "member")

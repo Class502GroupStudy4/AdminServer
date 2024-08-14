@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="form" th:object="${requestMember}">
+    <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+    <input type="hidden" name="seq" th:field="*{email}">
+    <h2>기본 설정</h2>
+    <tr>
+        <th>사용자 이름</th>
+        <td>
+            <input type="text" name="userName" th:field="*{userName}">
+
+            <div class="error" th:each="err : ${#fields.errors('userName')}" th:text="${err}"></div>
+        </td>
+    <tr>
+        <th>사용자 이메일</th>
+        <td>
+            <input type="text" name="userName" th:field="*{email}">
+
+            <div class="error" th:each="err : ${#fields.errors('userName')}" th:text="${err}"></div>
+        </td>
+    <th>사용자 비밀번호</th>
+    <td>
+        <input type="text" name="userName" th:field="*{password}">
+
+        <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
+    </td>
+    <th>사용자 휴대전화</th>
+    <td>
+        <input type="text" name="userName" th:field="*{mobile}">
+
+        <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
+    </td>
+
+    <th>사용자 권한</th>
+    <td>
+        <input type="radio" name="type" value="ALL" id="type_ADMIN" th:field="*{type}">
+        <label for="type_ADMIN">관리자</label>
+
+        <input type="radio" name="type" value="USER" id="type_MEMBER" th:field="*{type}">
+        <label for="type_MEMBER">사용자</label>
+    </td>
+    </tr>
+</th:block>
+</html>

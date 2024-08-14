@@ -1,6 +1,7 @@
 package org.g9project4.member.services;
 
 import lombok.RequiredArgsConstructor;
+import org.g9project4.adminmember.controllers.RequestMember;
 import org.g9project4.member.constants.Authority;
 import org.g9project4.member.controllers.RequestJoin;
 import org.g9project4.member.entities.Authorities;
@@ -29,6 +30,12 @@ public class MemberSaveService {
      * @param form
      */
     public void save(RequestJoin form) {
+        Member member = new ModelMapper().map(form, Member.class);
+        String hash = passwordEncoder.encode(member.getPassword());
+        member.setPassword(hash);
+        save(member, List.of(Authority.USER));
+    }
+    public void save(RequestMember form) {
         Member member = new ModelMapper().map(form, Member.class);
         String hash = passwordEncoder.encode(member.getPassword());
         member.setPassword(hash);

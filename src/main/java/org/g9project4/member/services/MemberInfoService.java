@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.Max;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.adminmember.controllers.MemberSearch;
+import org.g9project4.adminmember.controllers.RequestMember;
+import org.g9project4.board.entities.Board;
 import org.g9project4.global.ListData;
 import org.g9project4.global.Pagination;
 import org.g9project4.member.MemberInfo;
@@ -18,6 +20,7 @@ import org.g9project4.member.entities.Authorities;
 import org.g9project4.member.entities.Member;
 import org.g9project4.member.entities.QMember;
 import org.g9project4.member.repositories.MemberRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -54,6 +57,23 @@ public class MemberInfoService implements UserDetailsService {
                 .member(member)
                 .build();
     }
+    public Member get(Long seq){
+        Member member = memberRepository.findById(seq).orElse(null);
+        return member;
+    }
+    public RequestMember getForm(Long seq){
+        Member member =get(seq);
+        RequestMember form = new ModelMapper().map(member, RequestMember.class);
+        form.setMode("edit");
+        return form;
+    }
+    public RequestMember getForm(String email){
+        Member member = memberRepository.findByEmail(email).orElse(null);
+        RequestMember form = new ModelMapper().map(member, RequestMember.class);
+        form.setMode("edit");
+        return form;
+    }
+
     public ListData<Member> getList(MemberSearch search){
         int page = Math.max(search.getPage(), 1);
         int limit = Math.max(search.getLimit(), 1);
