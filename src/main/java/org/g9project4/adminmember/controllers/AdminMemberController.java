@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -83,17 +84,23 @@ public class AdminMemberController implements ExceptionProcessor {
 
     }
 
-    @PostMapping("/delete/{seq}")
-    public String delete(@PathVariable("seq") Long seq , Model model) {
-        commonProcess("list", model);
+    @GetMapping("/delete/{email}")
+    public String delete(@PathVariable("email") String email){
 
-        memberConfigDeleteService.delete(seq);
-
+        memberConfigDeleteService.delete(email);
         return "redirect:" + utils.redirectUrl("/manager/member");
     }
 
+    @PatchMapping
+    public String editList(@RequestParam("chk") List<Integer> chks, Model model) {
+        commonProcess("list", model);
+
+        model.addAttribute("script", "parent.location.reload()");
+        return "common/_execute_script";
+    }
+
     @DeleteMapping
-    public String deleteList(@RequestParam("chk") List<Integer> chks, Model model) {
+    public String deleteList(@RequestParam("chk") List<Integer> chks    , Model model) {
         commonProcess("list", model);
 
       memberConfigDeleteService.deleteList(chks);
@@ -112,8 +119,10 @@ public class AdminMemberController implements ExceptionProcessor {
         }else if (mode.equals("add")) {
             pageTitle = "회원 등록";
         }
+        List<String> addScript = new ArrayList<>();
 
         model.addAttribute("subMenuCode", mode);
         model.addAttribute("pageTitle", pageTitle);
+        model.addAttribute("addScript", addScript);
     }
 }

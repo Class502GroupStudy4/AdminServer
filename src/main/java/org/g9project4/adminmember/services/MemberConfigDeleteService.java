@@ -1,11 +1,7 @@
 package org.g9project4.adminmember.services;
 
 import lombok.RequiredArgsConstructor;
-import org.g9project4.board.entities.Board;
-import org.g9project4.board.exceptions.BoardNotFoundException;
-import org.g9project4.board.repositories.BoardRepository;
-import org.g9project4.board.services.BoardConfigDeleteService;
-import org.g9project4.board.services.BoardConfigInfoService;
+
 import org.g9project4.global.Utils;
 import org.g9project4.global.exceptions.script.AlertException;
 import org.g9project4.member.entities.Member;
@@ -22,20 +18,19 @@ import java.util.Optional;
 @Transactional
 @RequiredArgsConstructor
 public class MemberConfigDeleteService {
-    private final BoardRepository boardRepository;
-    private MemberRepository memberRepository;
-    private MemberInfoService memberInfoService;
+    private final MemberRepository memberRepository;
+    private final MemberInfoService memberInfoService;
     private final Utils utils;
     public void delete(Long seq) {
         Member member = memberInfoService.get(seq);
         memberRepository.delete(member);
-        boardRepository.flush();
+        memberRepository.flush();
     }
 
     public void delete(String email){
         Member member = memberInfoService.get(email);
         memberRepository.delete(member);
-        boardRepository.flush();
+        memberRepository.flush();
     }
     public void deleteList(List<Integer> chks){
         if (chks == null || chks.isEmpty()) {
