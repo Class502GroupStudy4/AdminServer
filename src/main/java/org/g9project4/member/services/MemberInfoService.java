@@ -11,6 +11,7 @@ import jakarta.validation.constraints.Max;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.adminmember.controllers.MemberSearch;
 import org.g9project4.adminmember.controllers.RequestMember;
+import org.g9project4.adminmember.exceptions.MemberNotFoundException;
 import org.g9project4.board.entities.Board;
 import org.g9project4.global.ListData;
 import org.g9project4.global.Pagination;
@@ -58,11 +59,11 @@ public class MemberInfoService implements UserDetailsService {
                 .build();
     }
     public Member get(Long seq){
-        Member member = memberRepository.findById(seq).orElse(null);
+        Member member = memberRepository.findById(seq).orElseThrow(MemberNotFoundException::new);
         return member;
     }
     public Member get(String email){
-        Member member = memberRepository.findByEmail(email).orElse(null);
+        Member member = memberRepository.findByEmail(email).orElseThrow(MemberNotFoundException::new);
         return member;
     }
     public RequestMember getForm(Long seq){
