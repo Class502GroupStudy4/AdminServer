@@ -66,10 +66,6 @@ public class AdminMemberController implements ExceptionProcessor {
         return "adminMember/member/edit";
     }
 
-
-
-
-
     @PostMapping("/save")
     public String save(@Valid RequestMember form, Errors errors, Model model) {
         String mode = form.getMode();
@@ -79,15 +75,18 @@ public class AdminMemberController implements ExceptionProcessor {
             return "adminMember/member/" + mode;
         }
         memberConfigSaveService.save(form);
-
         return "redirect:" + utils.redirectUrl("/manager/member");
 
     }
 
-    @GetMapping("/delete/{email}")
-    public String delete(@PathVariable("email") String email){
+    @PostMapping("/delete")
+    public String delete(RequestMember form, Model model){
+        String email = form.getEmail();
+        System.out.println("Email to delete: " + email);
 
         memberConfigDeleteService.delete(email);
+
+
         return "redirect:" + utils.redirectUrl("/manager/member");
     }
 

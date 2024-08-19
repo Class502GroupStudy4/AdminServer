@@ -143,10 +143,25 @@ public class BoardController implements ExceptionProcessor {
      * 게시글 관리
      *
      * @return
+     *  @GetMapping
+     *     public String list(@ModelAttribute BoardSearch search, Model model) {
+     *         commonProcess("list", model);
+     *
+     *         ListData<Board> data = configInfoService.getList(search, true);
+     *
+     *         List<Board> items = data.getItems();
+     *         Pagination pagination = data.getPagination();
+     *
+     *         model.addAttribute("items", items);
+     *         model.addAttribute("pagination", pagination);
+     *
+     *         return "board/list";
+     *     }
      */
     @GetMapping("/posts")
-    public String posts(Model model) {
+    public String posts(@ModelAttribute BoardSearch search, Model model) {
         commonProcess("posts", model);
+        ListData<Board> data = configInfoService.getList(search, true);
 
         return "board/posts";
     }

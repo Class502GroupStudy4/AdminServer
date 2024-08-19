@@ -10,9 +10,13 @@
         <th:block th:replace="~{adminMember/member/_form::form}"></th:block>
 
         <div class="submit_btns">
-            <button type="reset" class="btn">다시입력하기</button>
             <button type="submit" class="btn">수정하기</button>
         </div>
+    </form>
+    <form name="frmDelete" method="post" th:action="${@utils.redirectUrl('/manager/member/delete')}" autocomplete="off">
+        <input type="hidden" name="email" th:value="${requestMember.email}" />
+    <button type="submit" class="btn">삭제하기</button>
+
     </form>
 </section>
 </html>
