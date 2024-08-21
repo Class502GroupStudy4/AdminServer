@@ -13,6 +13,7 @@ import org.g9project4.adminmember.controllers.MemberSearch;
 import org.g9project4.adminmember.controllers.RequestMember;
 import org.g9project4.adminmember.exceptions.MemberNotFoundException;
 import org.g9project4.board.entities.Board;
+import org.g9project4.file.entities.FileInfo;
 import org.g9project4.global.ListData;
 import org.g9project4.global.Pagination;
 import org.g9project4.member.MemberInfo;
@@ -51,6 +52,7 @@ public class MemberInfoService implements UserDetailsService {
         List<SimpleGrantedAuthority> authorities = tmp.stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getAuthority().name()))
                 .toList();
+
         return MemberInfo.builder()
                 .email(member.getEmail())
                 .password(member.getPassword())
@@ -104,3 +106,4 @@ public class MemberInfoService implements UserDetailsService {
 
     }
 }
+

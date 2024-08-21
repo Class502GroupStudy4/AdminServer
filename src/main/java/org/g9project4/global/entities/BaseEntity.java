@@ -26,3 +26,4 @@ public abstract class BaseEntity implements Serializable {
     @Column(insertable = false)
     private LocalDateTime deletedAt;
 }
+
