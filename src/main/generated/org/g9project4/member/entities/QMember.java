@@ -41,8 +41,6 @@ public class QMember extends EntityPathBase<Member> {
 
     public final NumberPath<Long> seq = createNumber("seq", Long.class);
 
-    public final EnumPath<org.g9project4.member.constants.Authority> type = createEnum("type", org.g9project4.member.constants.Authority.class);
-
     public final StringPath userName = createString("userName");
 
     public QMember(String variable) {

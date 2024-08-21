@@ -28,12 +28,13 @@ public class Member extends BaseEntity implements Serializable {
     @Column(length=15,nullable = false)
     private String mobile;
 
+    /*
     @Enumerated(EnumType.STRING)
     @Column(length=20, nullable = false)
     private Authority type = Authority.ALL; // 권한 설정 - 글쓰기
-
+    */
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Authorities> authorities;
 }

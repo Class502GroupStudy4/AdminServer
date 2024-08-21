@@ -28,7 +28,7 @@ public class MemberConfigSaveService {
         member.setMobile(form.getMobile());
         member.setUserName(form.getUserName());
         member.setPassword(form.getPassword());
-        member.setType(Authority.valueOf(form.getType()));
+        //member.setType(Authority.valueOf(form.getType()));
 
         memberRepository.saveAndFlush(member);
     }

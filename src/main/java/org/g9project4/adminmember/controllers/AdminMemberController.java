@@ -84,6 +84,7 @@ public class AdminMemberController implements ExceptionProcessor {
         String email = form.getEmail();
         System.out.println("Email to delete: " + email);
 
+
         memberConfigDeleteService.delete(email);
 
 
