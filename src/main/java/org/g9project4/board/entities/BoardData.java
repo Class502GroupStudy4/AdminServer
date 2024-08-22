@@ -26,10 +26,10 @@ public class BoardData extends BaseEntity {
     private String gid;
 
     @JoinColumn(name="bid")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Board board;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Member member;
 
     @Column(length=65)
