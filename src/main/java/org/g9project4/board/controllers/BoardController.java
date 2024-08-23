@@ -4,7 +4,6 @@ package org.g9project4.board.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.g9project4.board.entities.Board;
 import org.g9project4.board.services.BoardConfigDeleteService;
 import org.g9project4.board.services.BoardConfigInfoService;

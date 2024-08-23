@@ -19,5 +19,5 @@ public @interface ValidBirthDate {
 
     Class<? extends Payload>[] payload() default {};
 
-    int minAge() default 14; // 최소 나이 (옵션)
+    int minAge() default 0; // 최소 나이 (옵션)
 }
