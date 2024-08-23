@@ -29,9 +29,7 @@ public class MemberConfigDeleteService {
 
     public void delete(String email){
         Member member = memberInfoService.get(email);
-        System.out.println(member);
         memberRepository.delete(member);
-        System.out.println("member:" + member);
 
         memberRepository.flush();
     }
