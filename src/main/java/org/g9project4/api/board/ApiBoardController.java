@@ -21,7 +21,6 @@ public class ApiBoardController implements RestExceptionProcessor {
     public JSONData getBoard(@PathVariable("bid") String bid){
         Board board = infoService.get(bid);
         return new JSONData(board);
-
     }
 
 }
