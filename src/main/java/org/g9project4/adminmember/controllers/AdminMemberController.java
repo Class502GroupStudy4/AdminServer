@@ -102,6 +102,7 @@ public class AdminMemberController implements ExceptionProcessor {
     public String editList(@RequestParam("chk") List<Integer> chks, Model model) {
         commonProcess("list", model);
 
+        memberConfigSaveService.saveList(chks);
         model.addAttribute("script", "parent.location.reload();");
         return "common/_execute_script";
     }
