@@ -15,6 +15,6 @@ public class BoardSearch {
     private String bName;
     private boolean active;
 
-    private String sopt; // 검색 옵션 
+    private String sopt; // 검색 옵션
     private String skey; // 검색 키워드
-}   
+}

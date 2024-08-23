@@ -1,10 +1,11 @@
-package org.g9project4.board.entities;
+package org.g9project4.boardData.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.g9project4.board.entities.Board;
 import org.g9project4.file.entities.FileInfo;
 import org.g9project4.global.entities.BaseEntity;
 import org.g9project4.member.entities.Member;
@@ -21,6 +22,7 @@ public class BoardData extends BaseEntity {
     @Id
     @GeneratedValue
     private Long seq;
+
 
     @Column(length=65, nullable = false, updatable = false)
     private String gid;

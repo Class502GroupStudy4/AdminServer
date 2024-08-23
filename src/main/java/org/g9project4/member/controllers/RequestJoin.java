@@ -28,7 +28,7 @@ public class RequestJoin implements Serializable {
     private String gid = UUID.randomUUID().toString();
     @NotNull
     @Past // 출생일은 과거 날짜여야 함
-    @ValidBirthDate(minAge = 14, message = "회원가입은 14세 이상이어야 합니다.")
+    @ValidBirthDate(minAge = 0, message = "회원가입은 14세 이상이어야 합니다.")
     private LocalDate birth;  // 출생일
     @NotNull
     @Enumerated(EnumType.STRING)

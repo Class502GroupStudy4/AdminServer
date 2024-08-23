@@ -24,8 +24,7 @@ public class Menu {
         
         menus.put("board", Arrays.asList(
                 new MenuDetail("list", "게시판목록", "/board"),
-                new MenuDetail("add", "게시판등록", "/board/add"),
-                new MenuDetail("posts", "게시글관리", "/board/posts")
+                new MenuDetail("add", "게시판등록", "/board/add")
         ));
     }
 
