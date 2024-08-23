@@ -84,7 +84,6 @@ public class BoardController implements ExceptionProcessor {
     @DeleteMapping
     public String deleteList(@RequestParam("chk") List<Integer> chks, Model model) {
         commonProcess("list", model);
-
         configDeleteService.deleteList(chks);
 
         model.addAttribute("script", "parent.location.reload();");

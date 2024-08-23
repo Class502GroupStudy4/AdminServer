@@ -37,15 +37,21 @@ public class AdminMemberController implements ExceptionProcessor {
     public String getMenuCode() {
         return "member";
     }
+
     @ModelAttribute("subMenus")
     public List<MenuDetail> getSubMenus() {
 
         return Menu.getMenus("member");
     }
+
     @ModelAttribute("memberAuthorities")
     public List<String[]> memberAuthorities() {
 
         return Authority.getList(); //enum 상수 String으로...
+    }
+    @ModelAttribute("authorityList")
+    public List<Authority> getAuthorityList() {
+        return Authority.getAuthorities();
     }
     @GetMapping
     public String list(@ModelAttribute MemberSearch search, Model model) {
@@ -58,9 +64,10 @@ public class AdminMemberController implements ExceptionProcessor {
 
         return "adminMember/member/list";
     }
+
     @GetMapping("/edit/{email}")
     public String edit(@PathVariable("email") String email, Model model) {
-        commonProcess("edit",model);
+        commonProcess("edit", model);
         RequestMember form = infoService.getForm(email);
         model.addAttribute("requestMember", form);
         return "adminMember/member/edit";
@@ -69,8 +76,8 @@ public class AdminMemberController implements ExceptionProcessor {
     @PostMapping("/save")
     public String save(@Valid RequestMember form, Errors errors, Model model) {
         String mode = form.getMode();
-        commonProcess(mode,model);
-        if(errors.hasErrors()) {
+        commonProcess(mode, model);
+        if (errors.hasErrors()) {
             errors.getAllErrors().stream().forEach(System.out::println);
             return "adminMember/member/" + mode;
         }
@@ -80,7 +87,7 @@ public class AdminMemberController implements ExceptionProcessor {
     }
 
     @PostMapping("/delete")
-    public String delete(RequestMember form, Model model){
+    public String delete(RequestMember form, Model model) {
         String email = form.getEmail();
         System.out.println("Email to delete: " + email);
 
@@ -95,28 +102,25 @@ public class AdminMemberController implements ExceptionProcessor {
     public String editList(@RequestParam("chk") List<Integer> chks, Model model) {
         commonProcess("list", model);
 
-        model.addAttribute("script", "parent.location.reload()");
+        model.addAttribute("script", "parent.location.reload();");
         return "common/_execute_script";
     }
 
     @DeleteMapping
-    public String deleteList(@RequestParam("chk") List<Integer> chks    , Model model) {
+    public String deleteList(@RequestParam("chk") List<Integer> chks, Model model) {
         commonProcess("list", model);
-
-      memberConfigDeleteService.deleteList(chks);
-
+        memberConfigDeleteService.deleteList(chks);
         model.addAttribute("script", "parent.location.reload();");
         return "common/_execute_script";
     }
 
 
-
     private void commonProcess(String mode, Model model) {
         mode = Objects.requireNonNullElse(mode, "list");
         String pageTitle = "회원 목록";
-        if(mode.equals("edit")) {
+        if (mode.equals("edit")) {
             pageTitle = "회원 수정";
-        }else if (mode.equals("add")) {
+        } else if (mode.equals("add")) {
             pageTitle = "회원 등록";
         }
         List<String> addScript = new ArrayList<>();
