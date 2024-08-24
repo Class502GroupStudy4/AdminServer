@@ -9,6 +9,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.Max;
 import lombok.RequiredArgsConstructor;
+import org.g9project4.adminmember.controllers.MemberForm;
 import org.g9project4.adminmember.controllers.MemberSearch;
 import org.g9project4.adminmember.controllers.RequestMember;
 import org.g9project4.adminmember.exceptions.MemberNotFoundException;
@@ -124,6 +125,14 @@ public class MemberInfoService implements UserDetailsService {
                 .fetchJoin()
                 .where(builder)
                 .fetch();
+    }
+    public MemberForm getMemberForm(Long seq){
+        Member member = memberRepository.findById(seq).orElseThrow(MemberNotFoundException::new);
+        MemberForm form = new ModelMapper().map(member, MemberForm.class);
+        List<String> authrities = member.getAuthorities().stream().map(a -> a.getAuthority().name()).toList();
+        form.setAuthorities(authrities);
+        form.setActivity(true);
+        return form;
     }
 }
 
