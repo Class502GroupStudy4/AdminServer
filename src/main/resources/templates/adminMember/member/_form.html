@@ -20,7 +20,7 @@
     </td>
     <th>사용자 휴대전화</th>
     <td>
-        <input type="text" name="userName" th:field="*{mobile}">
+        <input type="text" name="mobile" th:field="*{mobile}">
 
         <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
     </td>

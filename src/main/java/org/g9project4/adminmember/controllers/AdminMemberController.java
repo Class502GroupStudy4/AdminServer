@@ -16,6 +16,7 @@ import org.g9project4.menus.Menu;
 import org.g9project4.menus.MenuDetail;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,14 +54,19 @@ public class AdminMemberController implements ExceptionProcessor {
     public List<Authority> getAuthorityList() {
         return Authority.getAuthorities();
     }
+
     @GetMapping
     public String list(@ModelAttribute MemberSearch search, Model model) {
         commonProcess("list", model);
+        if(search != null && StringUtils.hasText(search.getSopt()) && StringUtils.hasText(search.getSkey())){
+            List<Member> searchResults = infoService.searchMember(search);
+            model.addAttribute("items", searchResults);
+        }else {
+            ListData<Member> data = infoService.getList(search);
 
-        ListData<Member> data = infoService.getList(search);
-
-        model.addAttribute("items", data.getItems()); // 목록
-        model.addAttribute("pagination", data.getPagination()); // 페이징
+            model.addAttribute("items", data.getItems()); // 목록
+            model.addAttribute("pagination", data.getPagination()); // 페이징
+        }
 
         return "adminMember/member/list";
     }
