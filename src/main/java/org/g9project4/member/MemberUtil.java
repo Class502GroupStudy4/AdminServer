@@ -32,9 +32,8 @@ public class MemberUtil {
     public Member getMember() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication.isAuthenticated() && authentication.getPrincipal() instanceof MemberInfo memberInfo) {
-            Member member = memberRepository.findByEmail(memberInfo.getEmail()).orElse(null);
-            return member;
+        if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof MemberInfo memberInfo) {
+            return memberRepository.findByEmail(memberInfo.getEmail()).orElse(null);
             //return memberInfo.getMember();
         }
 

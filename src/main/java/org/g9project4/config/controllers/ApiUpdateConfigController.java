@@ -3,9 +3,12 @@ package org.g9project4.config.controllers;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.config.service.ConfigInfoService;
 import org.g9project4.config.service.ConfigSaveService;
+import org.g9project4.global.exceptions.ApiUpdateFailureException;
 import org.g9project4.menus.Menu;
 import org.g9project4.menus.MenuDetail;
+import org.g9project4.publicData.events.PublicDataStartEvent;
 import org.g9project4.publicData.greentour.services.GreenUpdateService;
+import org.g9project4.publicData.services.PublicDataEventListener;
 import org.g9project4.publicData.tour.services.ApiUpdateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +23,8 @@ public class ApiUpdateConfigController {
     private final ConfigInfoService infoService;
     private final ApiUpdateService apiUpdateService;
     private final GreenUpdateService greenUpdateService;
+    private final PublicDataEventListener publicDataEventListener;
+
     @ModelAttribute("menuCode")
     public String getMenuCode() {
         return "config";
@@ -39,6 +44,7 @@ public class ApiUpdateConfigController {
     public String getPageTitle() {
         return "API 업데이트 설정";
     }
+
     @GetMapping()
     public String update(Model model) {
         ApiConfig config = infoService.get("apiConfig", ApiConfig.class).orElseGet(ApiConfig::new);
@@ -47,14 +53,18 @@ public class ApiUpdateConfigController {
 
         return "config/update";
     }
+
     @PostMapping("/{type}")
-    public String updateTour(@PathVariable("type") String type, Model model) {
+    public String updateTour(@PathVariable("type") String type, Model model){
         ApiConfig config = infoService.get("apiConfig", ApiConfig.class).orElseGet(ApiConfig::new);
-        if(type.equals("tour")){
-            apiUpdateService.update(config.getPublicOpenApiKey());
-        } else if (type.equals("green")) {
-            greenUpdateService.greenUpdate(config.getPublicOpenApiKey());
+
+        try {
+            publicDataEventListener.apiUpdate(new PublicDataStartEvent(type,config.getPublicOpenApiKey()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ApiUpdateFailureException();
         }
-        return "config/api/update";
+
+        return "redirect:/config/api/update";
     }
 }
