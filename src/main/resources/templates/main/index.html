@@ -2,7 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/main}">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 <section layout:fragment="content">
-    <h1>관리자 메인</h1>
+    <h1>Visitor Statistics</h1>
+    <div class="container">
+        <!-- 왼쪽: 테이블 -->
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Visitor Count</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="stat : ${stats}">
+                    <td th:text="${stat.visitDate}">2024-01-01</td>
+                    <td th:text="${stat.visitCount}">123</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 오른쪽: 그래프 -->
+        <div class="chart-container">
+            <canvas id="visitorChart"></canvas>
+        </div>
+    </div>
 </section>
 </html>
