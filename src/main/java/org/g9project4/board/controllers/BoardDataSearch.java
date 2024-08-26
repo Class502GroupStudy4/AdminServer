@@ -1,4 +1,5 @@
-package org.g9project4.boardData.controllers;
+package org.g9project4.board.controllers;
+
 import lombok.Data;
 import org.g9project4.global.CommonSearch;
 

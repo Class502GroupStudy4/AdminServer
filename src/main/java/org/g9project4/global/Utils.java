@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,8 +29,19 @@ public class Utils { // 빈의 이름 - utils
     private final HttpServletRequest request;
     private final DiscoveryClient discoveryClient;
 
+    public HttpHeaders getCommonHeaders(String method){
+        HttpHeaders headers = new HttpHeaders();
+        if (!List.of("GET", "DELETE").contains(method)) {
+            headers.setContentType(MediaType.APPLICATION_JSON);
+        }
+        return headers;
+    }
+
     public String url(String url) {
-        List<ServiceInstance> instances = discoveryClient.getInstances("admin-service");
+        return url(url, "admin-service");
+    }
+    public String url(String url, String serviceId) {
+        List<ServiceInstance> instances = discoveryClient.getInstances(serviceId);
 
         try {
             return String.format("%s%s", instances.get(0).getUri().toString(), url);
