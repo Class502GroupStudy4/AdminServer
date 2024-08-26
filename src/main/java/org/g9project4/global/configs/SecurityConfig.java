@@ -47,7 +47,7 @@ public class SecurityConfig {
             authorizeRequests
                     .requestMatchers("/member/**", "/api/board/config/**", "/config/api/**").permitAll()
                     .anyRequest().permitAll();
-                    //.anyRequest().hasAnyAuthority("ADMIN");
+            //.anyRequest().hasAnyAuthority("ADMIN");
         });
         http.exceptionHandling(c -> {
             c.authenticationEntryPoint(new MemberAuthenticationEntryPoint())//예외 가
