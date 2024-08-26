@@ -1,4 +1,4 @@
-package org.g9project4.boardData.controllers;
+package org.g9project4.board.controllers;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -49,4 +49,3 @@ public class RequestBoard {
     private List<FileInfo> attachFiles;
 
 }
-
