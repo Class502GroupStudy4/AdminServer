@@ -71,7 +71,7 @@ public class MemberInfoService implements UserDetailsService {
         return member;
     }
     public RequestMember getForm(Long seq){
-        Member member =get(seq);
+        Member member = memberRepository.findById(seq).orElseThrow(MemberNotFoundException::new);
         RequestMember form = new ModelMapper().map(member, RequestMember.class);
         form.setMode("edit");
         return form;

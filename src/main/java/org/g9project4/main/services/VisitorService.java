@@ -5,13 +5,17 @@ import org.g9project4.main.entities.VisitorCount;
 import org.g9project4.main.repositories.VisitorCountRepository;
 import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class VisitorService {
     private final VisitorCountRepository visitorCountRepository;
 
@@ -31,6 +35,12 @@ public class VisitorService {
         }
     }
     public List<VisitorCount> getVisitorStatistics(){
-        return visitorCountRepository.findAllByOrderByVisitDateAsc();
+        List<VisitorCount> allStats = visitorCountRepository.findAllByOrderByVisitDateAsc();
+
+
+        return allStats.stream()
+                .sorted(Comparator.comparing(VisitorCount::getVisitDate).reversed())
+                .limit(5) //
+                .collect(Collectors.toList());
     }
 }

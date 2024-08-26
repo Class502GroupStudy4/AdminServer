@@ -71,14 +71,14 @@ public class AdminMemberController implements ExceptionProcessor {
         return "adminMember/member/list";
     }
 
-    @GetMapping("/edit/{seq}")
-    public String edit(@PathVariable("seq") Long seq,@ModelAttribute MemberForm member, Model model) {
+    @GetMapping("/edit/{email}")
+    public String edit(@PathVariable("email") String email, Model model) {
         commonProcess("edit", model);
-
-        member = infoService.getMemberForm(seq);
-       model.addAttribute("member", member);
+        RequestMember form = infoService.getForm(email);
+        model.addAttribute("requestMember", form);
         return "adminMember/member/edit";
     }
+
 
     @PostMapping("/save")
     public String save(@Valid RequestMember form, Errors errors, Model model) {

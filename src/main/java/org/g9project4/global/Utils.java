@@ -26,6 +26,7 @@ public class Utils { // 빈의 이름 - utils
     private final HttpServletRequest request;
     private final DiscoveryClient discoveryClient;
 
+
     public String url(String url) {
         List<ServiceInstance> instances = discoveryClient.getInstances("admin-service");
 

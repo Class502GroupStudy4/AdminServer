@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <section layout:fragment="content">
-    <h1>Visitor Statistics</h1>
+    <h1>사이트 방문자 통계</h1>
     <div class="container">
         <!-- 왼쪽: 테이블 -->
         <div class="table-container">
@@ -18,10 +18,10 @@
                     <th>Visitor Count</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="jang">
                 <tr th:each="stat : ${stats}">
-                    <td th:text="${stat.visitDate}">2024-01-01</td>
-                    <td th:text="${stat.visitCount}">123</td>
+                    <td th:text="${stat.visitDate}"></td>
+                    <td th:text="${stat.visitCount}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -29,8 +29,13 @@
 
         <!-- 오른쪽: 그래프 -->
         <div class="chart-container">
-            <canvas id="visitorChart"></canvas>
+            <canvas id="visitChart"></canvas>
         </div>
     </div>
+    <h1>장성준</h1>
+    <div class="middleContainer">
+
+    </div>
+
 </section>
 </html>

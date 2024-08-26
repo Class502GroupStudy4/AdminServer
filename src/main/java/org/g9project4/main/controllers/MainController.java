@@ -32,6 +32,7 @@ public class MainController {
 
         visitorService.recordVisit();
         List<VisitorCount> stats = visitorService.getVisitorStatistics();
+
         model.addAttribute("stats", stats);
         return "main/index";
     }

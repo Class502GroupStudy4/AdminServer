@@ -1,28 +1,30 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var stats = /*[[${stats}]]*/ [];
+document.addEventListener("DOMContentLoaded", function() {
+    var tbody = document.getElementById('jang');
+    var rows = tbody.getElementsByTagName('tr');
 
-    // 데이터 준비
-    const dates = stats.map(stat => stat.visitDate);
-    const counts = stats.map(stat => stat.visitCount);
+    var dates = [];
+    var counts = [];
 
-    // 그래프 생성
-    const ctx = document.getElementById('visitorChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'line', // 그래프의 종류 (선 그래프)
+    for (var i = 0; i < rows.length; i++) {
+        var cells = rows[i].getElementsByTagName('td');
+        dates.push(cells[0].textContent.trim());
+        counts.push(parseInt(cells[1].textContent.trim()));
+    }
+
+    var ctx = document.getElementById('visitChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
         data: {
-            labels: dates, // X축 레이블 (날짜)
+            labels: dates,
             datasets: [{
                 label: 'Visitor Count',
-                data: counts, // Y축 데이터 (방문자 수)
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderWidth: 2,
-                fill: true
+                data: counts,
+                borderColor: 'rgb(75, 192, 192)',
+                fill: false
             }]
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
             scales: {
                 x: {
                     beginAtZero: true
