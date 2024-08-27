@@ -2,6 +2,7 @@ package org.g9project4.member.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.g9project4.global.entities.BaseEntity;
 import org.g9project4.member.constants.Authority;
@@ -53,4 +54,12 @@ public class Member extends BaseEntity implements Serializable {
     @ToString.Exclude
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Authorities> authorities;
+
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "member")
+    @Size(max = 5, message = "A member can have a maximum of 5 interests.")
+    private List<Interests> interests;
+    // 관심사 (맛집 | 호캉스 | 박물관 | 캠핑 | 등산 | 자연 | 예술 | 강/바다 | 아이와 함께 | 온가족 함께 | 연인과 함께 | 낚시)
+    //MATJIB, HOCANCE, MUSEUM, CAMPING, HIKING, NATURE, ART, SEA, WITHCHILD, WITHFAMILY, WITHLOVER, FISHING
 }
