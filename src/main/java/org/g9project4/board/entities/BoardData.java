@@ -44,6 +44,7 @@ public class BoardData extends BaseEntity {
     private String content;
 
     private int viewCount; // 조회수
+
     private boolean editorView; // 에디터를 사용해서 글 작성했는지 여부
 
 
