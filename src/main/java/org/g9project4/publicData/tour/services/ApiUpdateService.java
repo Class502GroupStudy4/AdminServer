@@ -12,6 +12,7 @@ import org.g9project4.global.rests.gov.greenapi.GreenItem;
 import org.g9project4.global.rests.gov.greenapi.GreenResult;
 import org.g9project4.global.rests.gov.sigunguapi.SigunguItem;
 import org.g9project4.global.rests.gov.sigunguapi.SigunguResult;
+import org.g9project4.publicData.tour.constants.ContentType;
 import org.g9project4.publicData.tour.entities.*;
 import org.g9project4.publicData.tour.repositories.*;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +45,7 @@ public class ApiUpdateService {
      * @param sKey
      */
     public void update(String sKey) {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
 
             String url = String.format("https://apis.data.go.kr/B551011/KorService1/areaBasedList1?MobileOS=AND&MobileApp=test&numOfRows=1000&pageNo=%d&serviceKey=%s&_type=json", i, sKey);
 
@@ -113,21 +114,19 @@ public class ApiUpdateService {
                 List<GreenItem> items = response.getBody().getResponse().getBody().getItems().getItem();
                 for (GreenItem item : items) {
                     try {
-                        GreenPlace greenPlace = GreenPlace.builder()
+                        TourPlace greenPlace = TourPlace.builder()
                                 .address(item.getAddr())
-                                .areacode(item.getAreacode())
-                                .contentId(item.getContentid())
+                                .areaCode(item.getAreacode())
+                                .contentTypeId(ContentType.GreenTour.getId())
+                                .contentId(Long.valueOf(item.getContentid()))
                                 .firstImage(item.getMainimage())
                                 .cpyrhtDivCd(item.getCpyrhtDivCd())
-                                .modifiedtime(item.getModifiedtime())
-                                .sigugunCode(item.getSigungucode())
-                                .subTitle(item.getSubtitle())
-                                .summary(item.getSummary())
+                                .modifiedTime(item.getModifiedtime())
+                                .sigunguCode(item.getSigungucode())
                                 .tel(item.getTel())
-                                .telName(item.getTelname())
                                 .title(item.getTitle())
                                 .build();
-                        greenPlaceRepository.saveAndFlush(greenPlace);
+                        tourPlaceRepository.saveAndFlush(greenPlace);
                     } catch (Exception e) {
                         e.printStackTrace();
                         break;
