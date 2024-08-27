@@ -92,4 +92,11 @@ public class BoardInfoService {
 
         return new ListData<>();
     }
+
+    public ListData<BoardData> getList(String bid, BoardDataSearch search){
+        search.setBid(bid);
+        return getList(search);
+    }
+    public ListData<BoardData> getList(String bid){return getList(bid,new BoardDataSearch());}
+
 }

@@ -69,6 +69,18 @@ public class BoardController implements ExceptionProcessor {
         return "board/list";
     }
 
+    @GetMapping("/{bid}")
+    public String categoryPosts(@PathVariable("bid") String bid, @ModelAttribute  BoardDataSearch search, Model model){
+        commonProcess("posts", model);
+        ListData<BoardData> data = boardInfoService.getList(bid,search);
+
+        model.addAttribute("items",data.getItems());
+        model.addAttribute("pagination", data.getPagination());
+
+        return "board/posts";
+    }
+
+
     /**
      * 게시판 목록 - 수정
      *
