@@ -118,11 +118,11 @@
         <tr>
             <th>글작성 후 이동</th>
             <td>
-                <input type="radio" name="locationAfterWriting" value="list" id="locationAfterWriting_list" th:field="*{locationAfterWriting}">
-                <label for="locationAfterWriting_list">글목록</label>
-
-                <input type="radio" name="locationAfterWriting" value="view" id="locationAfterWriting_view" th:field="*{locationAfterWriting}">
-                <label for="locationAfterWriting_view">글보기</label>
+                <select name="locationAfterWriting" th:field="*{locationAfterWriting}">
+                    <option value="list">글목록</option>
+                    <option value="view">글보기</option>
+                    <option value="admin">관리자</option>
+                </select>
             </td>
         </tr>
 
