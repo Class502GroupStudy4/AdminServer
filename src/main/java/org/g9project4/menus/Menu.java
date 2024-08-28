@@ -14,7 +14,8 @@ public class Menu {
 
         menus.put("config", Arrays.asList(
                 new MenuDetail("basic", "기본설정", "/config"),
-                new MenuDetail("api", "API 설정", "/config/api")
+                new MenuDetail("api", "API 설정", "/config/api"),
+                new MenuDetail("update","API 업데이트", "/config/api/update")
         ));
 
         menus.put("member", Arrays.asList(

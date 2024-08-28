@@ -18,6 +18,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class FileDeleteService {
+
     private final FileInfoService infoService;
     private final FileInfoRepository infoRepository;
     private final MemberUtil memberUtil;

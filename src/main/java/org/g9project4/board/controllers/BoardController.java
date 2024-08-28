@@ -4,11 +4,12 @@ package org.g9project4.board.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.g9project4.board.entities.Board;
+import org.g9project4.board.entities.BoardData;
 import org.g9project4.board.services.BoardConfigDeleteService;
 import org.g9project4.board.services.BoardConfigInfoService;
 import org.g9project4.board.services.BoardConfigSaveService;
+import org.g9project4.board.services.BoardInfoService;
 import org.g9project4.board.validators.BoardConfigValidator;
 import org.g9project4.global.ListData;
 import org.g9project4.global.Pagination;
@@ -32,8 +33,10 @@ public class BoardController implements ExceptionProcessor {
     private final BoardConfigSaveService configSaveService;
     private final BoardConfigInfoService configInfoService;
     private final BoardConfigDeleteService configDeleteService;
-
     private final BoardConfigValidator configValidator;
+
+    private final BoardInfoService boardInfoService;
+
     private final Utils utils;
 
     @ModelAttribute("menuCode")
@@ -66,6 +69,18 @@ public class BoardController implements ExceptionProcessor {
         return "board/list";
     }
 
+    @GetMapping("/{bid}")
+    public String categoryPosts(@PathVariable("bid") String bid, @ModelAttribute  BoardDataSearch search, Model model){
+        commonProcess("posts", model);
+        ListData<BoardData> data = boardInfoService.getList(bid,search);
+
+        model.addAttribute("items",data.getItems());
+        model.addAttribute("pagination", data.getPagination());
+
+        return "board/posts";
+    }
+
+
     /**
      * 게시판 목록 - 수정
      *
@@ -85,7 +100,6 @@ public class BoardController implements ExceptionProcessor {
     @DeleteMapping
     public String deleteList(@RequestParam("chk") List<Integer> chks, Model model) {
         commonProcess("list", model);
-
         configDeleteService.deleteList(chks);
 
         model.addAttribute("script", "parent.location.reload();");
@@ -143,10 +157,28 @@ public class BoardController implements ExceptionProcessor {
      * 게시글 관리
      *
      * @return
+     *  @GetMapping
+     *     public String list(@ModelAttribute BoardSearch search, Model model) {
+     *         commonProcess("list", model);
+     *
+     *         ListData<Board> data = configInfoService.getList(search, true);
+     *
+     *         List<Board> items = data.getItems();
+     *         Pagination pagination = data.getPagination();
+     *
+     *         model.addAttribute("items", items);
+     *         model.addAttribute("pagination", pagination);
+     *
+     *         return "board/list";
+     *     }
      */
     @GetMapping("/posts")
-    public String posts(Model model) {
+    public String posts(@ModelAttribute BoardDataSearch search, Model model) {
         commonProcess("posts", model);
+
+        ListData<BoardData> data = boardInfoService.getList(search);
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination", data.getPagination());
 
         return "board/posts";
     }

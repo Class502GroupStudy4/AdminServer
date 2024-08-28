@@ -16,7 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor @AllArgsConstructor
 public class Authorities implements Serializable {
     @Id
-    @ManyToOne(fetch= FetchType.LAZY)
+    @ManyToOne(fetch= FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Member member;
 
     @Id

@@ -24,5 +24,8 @@ public enum Authority {
                 new String[] {ADMIN.name(), ADMIN.title}
         );
     }
+    public static List<Authority> getAuthorities() {
+        return List.of(Authority.ALL, Authority.USER, Authority.ADMIN);
+    }
 }
 

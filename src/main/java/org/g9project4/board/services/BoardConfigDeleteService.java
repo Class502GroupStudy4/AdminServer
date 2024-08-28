@@ -48,6 +48,7 @@ public class BoardConfigDeleteService {
 
         for (int chk : chks) {
             String bid = utils.getParam("bid_" + chk);
+            System.out.println(bid);
             delete(bid);
         }
     }

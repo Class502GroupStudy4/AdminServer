@@ -45,9 +45,9 @@ public class SecurityConfig {
         /* 인가(접근 통제) 설정 S*/
         http.authorizeRequests(authorizeRequests -> {
             authorizeRequests
-                    .requestMatchers("/member/**").permitAll()
+                    .requestMatchers("/member/**", "/api/board/config/**", "/config/api/**").permitAll()
                     .anyRequest().permitAll();
-                    //.anyRequest().hasAnyAuthority("ADMIN");
+            //.anyRequest().hasAnyAuthority("ADMIN");
         });
         http.exceptionHandling(c -> {
             c.authenticationEntryPoint(new MemberAuthenticationEntryPoint())//예외 가
@@ -60,9 +60,9 @@ public class SecurityConfig {
         http.headers(c -> c.frameOptions(f -> f.sameOrigin()));
 
         /*자동 로그인 설정 S*/
-        http.rememberMe(c-> {
+        http.rememberMe(c -> {
             c.rememberMeParameter("autoLogin")
-                    .tokenValiditySeconds(60*60*24*15) // 15일간 유효
+                    .tokenValiditySeconds(60 * 60 * 24 * 15) // 15일간 유효
                     .userDetailsService(memberInfoService) //재로그인할 때 인증을 위해
                     .authenticationSuccessHandler(new LoginSuccessHandler()); // 자동 로그인 성공-> handler가 처리
         });

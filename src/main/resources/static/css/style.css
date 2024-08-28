@@ -151,3 +151,30 @@ ac { text-align: center !important; }
 #layer_popup { position: fixed; z-index: 101; background: #fff; border-radius: 5px; overflow: hidden; }
 #layer_popup iframe { border: 0; }
 /* 팝업 공통 E */
+
+
+/* 게시글 관리 */
+.tab-menu {
+    margin-top: 60px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    color: #FFF;
+}
+
+.tab-menu a {
+    background-color: #333333;
+    font-weight: bold;
+    margin-right: 10px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #FFF;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.tab-menu a:hover {
+    background-color: #2A4840;
+    color: white;
+}
