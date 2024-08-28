@@ -53,7 +53,7 @@ public class Member extends BaseEntity implements Serializable {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private transient List<Authorities> authorities;
+    private  List<Authorities> authorities;
 
 
     @ToString.Exclude

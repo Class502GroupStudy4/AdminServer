@@ -97,6 +97,8 @@ public class BoardController implements ExceptionProcessor {
         return "common/_execute_script";
     }
 
+
+
     @DeleteMapping
     public String deleteList(@RequestParam("chk") List<Integer> chks, Model model) {
         commonProcess("list", model);
