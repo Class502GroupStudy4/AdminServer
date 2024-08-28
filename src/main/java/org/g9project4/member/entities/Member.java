@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.g9project4.global.entities.BaseEntity;
-import org.g9project4.member.constants.Authority;
 import org.g9project4.member.constants.Gender;
 
 import java.io.Serializable;
