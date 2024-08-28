@@ -29,7 +29,6 @@ public class ApiUpdateService {
 
     private final RestTemplate restTemplate;
     private final TourPlaceRepository tourPlaceRepository;
-    private final GreenPlaceRepository greenPlaceRepository;
 
     private final AreaCodeRepository areaCodeRepository;
     private final SigunguCodeRepository sigunguCodeRepository;
@@ -103,7 +102,7 @@ public class ApiUpdateService {
     public void greenUpdate(String sKey) {
         for (int i = 0; i < 5; i++) {
             String url = String.format("https://apis.data.go.kr/B551011/GreenTourService1/areaBasedList1?numOfRows=30&pageNo=%d&MobileOS=AND&MobileApp=test&_type=json&serviceKey=%s", i, sKey);
-            ResponseEntity<GreenResult> response = restTemplate.getForEntity(url, GreenResult.class);
+            ResponseEntity<GreenResult> response = null;
             try {
                 response = restTemplate.getForEntity(URI.create(url), GreenResult.class);
             } catch (Exception e) {
