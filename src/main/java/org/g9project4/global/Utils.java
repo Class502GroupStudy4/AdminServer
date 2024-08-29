@@ -143,6 +143,9 @@ public class Utils { // 빈의 이름 - utils
     public String getParam(String name) {
         return request.getParameter(name);
     }
+    public Long getLongParam(Long seq) {
+        return Long.parseLong(request.getParameter(String.valueOf(seq)));
+    }
 
     /**
      * 요청 데이터 복수개 조회 편의 함수
