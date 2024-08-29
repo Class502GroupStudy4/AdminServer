@@ -35,9 +35,14 @@ public class MainController {
         addScript.add("main/chart");
         model.addAttribute("addCss", addCss);
         model.addAttribute("addScript", addScript);
-        ListData<BoardData> data = boardInfoService.getListQna(search);
-        model.addAttribute("items", data.getItems());
-        model.addAttribute("pagination", data.getPagination());
+        try {
+            ListData<BoardData> data = boardInfoService.getListQna(search);
+            model.addAttribute("items", data.getItems());
+            model.addAttribute("pagination", data.getPagination());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("ID 가 'qna'인 게시판을 만드세요");
+        }
 
 
 //        visitorService.recordVisit();
