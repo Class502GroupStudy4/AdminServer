@@ -37,8 +37,8 @@
                         <input type="checkbox" class="checkall" data-target-name="chk" id="checkall">
                         <label for="checkall"></label>
                     </th>
-                    <th width="150">게시판 ID</th>
-                    <th width="250">게시판 이름</th>
+                    <th width="300">게시판 ID</th>
+                    <th width="300">게시판 이름</th>
                     <th width="250">사용여부</th>
                     <th width="120">진열가중치</th>
                     <th></th>
@@ -69,9 +69,6 @@
                     <td>
                         <a th:href="*{@utils.url('/board/edit/' + bid)}" class="sbtn">
                             <i class="xi-pen"></i> 수정하기
-                        </a>
-                        <a th:href="*{@utils.url('/board/data/list/' + bid)}" class="sbtn">
-                            <i class="xi-pen"></i> 게시글 관리하기
                         </a>
                     </td>
                 </tr>
