@@ -20,14 +20,14 @@
     </td>
     <th>사용자 휴대전화</th>
     <td>
-        <input type="text" name="userName" th:field="*{mobile}">
+        <input type="text" name="mobile" th:field="*{mobile}">
 
         <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
     </td>
 
     <th>사용자 권한</th>
     <td>
-        <input type="radio" name="type" value="ALL" id="type_ADMIN" th:field="*{type}">
+        <input type="radio" name="type" value="ADMIN" id="type_ADMIN" th:field="*{type}">
         <label for="type_ADMIN">관리자</label>
 
         <input type="radio" name="type" value="USER" id="type_MEMBER" th:field="*{type}">

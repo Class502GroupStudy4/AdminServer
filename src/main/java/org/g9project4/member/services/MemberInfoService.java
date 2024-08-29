@@ -9,6 +9,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.Max;
 import lombok.RequiredArgsConstructor;
+import org.g9project4.adminmember.controllers.MemberForm;
 import org.g9project4.adminmember.controllers.MemberSearch;
 import org.g9project4.adminmember.controllers.RequestMember;
 import org.g9project4.adminmember.exceptions.MemberNotFoundException;
@@ -28,6 +29,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Objects;
@@ -69,7 +71,7 @@ public class MemberInfoService implements UserDetailsService {
         return member;
     }
     public RequestMember getForm(Long seq){
-        Member member =get(seq);
+        Member member = memberRepository.findById(seq).orElseThrow(MemberNotFoundException::new);
         RequestMember form = new ModelMapper().map(member, RequestMember.class);
         form.setMode("edit");
         return form;
@@ -83,7 +85,7 @@ public class MemberInfoService implements UserDetailsService {
 
     public ListData<Member> getList(MemberSearch search){
         int page = Math.max(search.getPage(), 1);
-        int limit = Math.max(search.getLimit(), 1);
+        int limit = Math.max(search.getLimit(), 20);
         int offset = (page - 1) * limit;
         BooleanBuilder andBuilder = new BooleanBuilder();
         QMember member = QMember.member;
@@ -104,6 +106,33 @@ public class MemberInfoService implements UserDetailsService {
         Pagination pagination = new Pagination(page, total, 10 ,limit , request);
         return new ListData<>(items, pagination);
 
+    }
+
+    public List<Member> searchMember(MemberSearch search){
+        BooleanBuilder builder = new BooleanBuilder();
+        QMember member = QMember.member;
+        if("email".equals(search.getSopt())) {
+            builder.and(member.email.like("%" + search.getSkey() + "%"));
+        }  else if ("userName".equals(search.getSopt())) {
+            builder.and(member.userName.like("%" + search.getSkey() + "%"));
+        }  else if ("ALL".equals(search.getSopt())) {
+                builder.or(member.email.like("%" + search.getSkey() + "%"))
+                        .or(member.userName.like("%" + search.getSkey() + "%"));
+        }
+        return  new JPAQueryFactory(em)
+                .selectFrom(member)
+                .leftJoin(member.authorities)
+                .fetchJoin()
+                .where(builder)
+                .fetch();
+    }
+    public MemberForm getMemberForm(Long seq){
+        Member member = memberRepository.findById(seq).orElseThrow(MemberNotFoundException::new);
+        MemberForm form = new ModelMapper().map(member, MemberForm.class);
+        List<String> authrities = member.getAuthorities().stream().map(a -> a.getAuthority().name()).toList();
+        form.setAuthorities(authrities);
+        form.setActivity(true);
+        return form;
     }
 }
 
