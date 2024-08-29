@@ -44,6 +44,7 @@ public class BoardData extends BaseEntity {
     private String content;
 
     private int viewCount; // 조회수
+    private int commentCount;
     private boolean editorView; // 에디터를 사용해서 글 작성했는지 여부
 
 
@@ -77,15 +78,15 @@ public class BoardData extends BaseEntity {
 
     private List<FileInfo> attachFiles;
 
-
+    @Transient
     private boolean editable; // 수정, 삭제 가능 여부
     
-
+    @Transient
     private boolean commentable; //댓글 수정, 삭제 가능 여부
 
-
+    @Transient
     private boolean viewable; // 상세쪽 조회 가능 여부
-
+    @Transient
     private boolean listable; //목록쪽 조획 가능 여부
 
 }

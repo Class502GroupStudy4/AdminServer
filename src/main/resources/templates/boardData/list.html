@@ -5,7 +5,7 @@
 <section layout:fragment="content">
     <th:block th:fragment="items">
         <h1 th:text="${bName}"></h1>
-        <form name="frmList" method="post" th:action="@{/boardData}" target="ifrmProcess" autocomplete="off">
+        <form name="frmList" method="post" th:action="@{/boardData}" target="ifrmHidden" autocomplete="off">
             <input type="hidden" name="_method" value="PATCH">
 
             <table class="table_rows">
