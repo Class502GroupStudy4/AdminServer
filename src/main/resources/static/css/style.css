@@ -178,3 +178,8 @@ ac { text-align: center !important; }
     background-color: #2A4840;
     color: white;
 }
+.table_rows th,
+.table_rows td {
+    text-align: center; /* 텍스트를 가운데 정렬 */
+    vertical-align: middle; /* 세로 정렬도 가운데로 */
+}

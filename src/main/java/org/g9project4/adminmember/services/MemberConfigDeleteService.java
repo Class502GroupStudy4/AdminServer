@@ -19,18 +19,15 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberConfigDeleteService {
     private final MemberRepository memberRepository;
-    private final MemberInfoService memberInfoService;
+    private final AllMemberConfigInfoService memberConfigInfoService;
     private final Utils utils;
-    public void delete(Long seq) {
-        Member member = memberInfoService.get(seq);
-        memberRepository.delete(member);
-        memberRepository.flush();
-    }
-
     public void delete(String email){
-        Member member = memberInfoService.get(email);
-        memberRepository.delete(member);
+        Member member = memberConfigInfoService.get(email);
+        if (member == null) {
+            throw new AlertException("회원이 존재하지 않습니다.", HttpStatus.NOT_FOUND);
+        }
 
+        memberRepository.delete(member);
         memberRepository.flush();
     }
     public void deleteList(List<Integer> chks){

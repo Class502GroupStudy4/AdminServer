@@ -1,5 +1,6 @@
 package org.g9project4.member.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +17,7 @@ import java.io.Serializable;
 @NoArgsConstructor @AllArgsConstructor
 public class Authorities implements Serializable {
     @Id
+    @JsonIgnore
     @ManyToOne(fetch= FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Member member;
 

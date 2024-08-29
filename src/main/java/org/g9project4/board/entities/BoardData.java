@@ -1,11 +1,7 @@
 package org.g9project4.board.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.g9project4.file.entities.FileInfo;
 import org.g9project4.global.entities.BaseEntity;
 import org.g9project4.member.entities.Member;
@@ -78,15 +74,15 @@ public class BoardData extends BaseEntity {
 
     private List<FileInfo> attachFiles;
 
-    @Transient
+
     private boolean editable; // 수정, 삭제 가능 여부
-    
-    @Transient
+
+
     private boolean commentable; //댓글 수정, 삭제 가능 여부
 
-    @Transient
+
     private boolean viewable; // 상세쪽 조회 가능 여부
-    @Transient
+
     private boolean listable; //목록쪽 조획 가능 여부
 
 }
