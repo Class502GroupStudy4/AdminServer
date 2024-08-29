@@ -94,7 +94,7 @@ public class MemberInfoService implements UserDetailsService {
 
         List<Member> items = new JPAQueryFactory(em)
                 .selectFrom(member)
-                .leftJoin(member.authorities)
+               // .leftJoin(member.authorities)
                 .fetchJoin()
                 .where(andBuilder)
                 .limit(limit)
@@ -121,7 +121,7 @@ public class MemberInfoService implements UserDetailsService {
         }
         return  new JPAQueryFactory(em)
                 .selectFrom(member)
-                .leftJoin(member.authorities)
+                //.leftJoin(member.authorities)
                 .fetchJoin()
                 .where(builder)
                 .fetch();
