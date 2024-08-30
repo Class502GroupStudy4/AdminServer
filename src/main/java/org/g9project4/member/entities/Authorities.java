@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class Authorities implements Serializable {
     @Id
     @JsonIgnore
-    @ManyToOne(fetch= FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch= FetchType.LAZY)
     private Member member;
 
     @Id

@@ -59,21 +59,19 @@
                 <td th:text="*{mobile}" align="center"></td>
                 <td th:text="${#temporals.format(item.createdAt, 'yyyy-MM-dd')}" align="center"></td>
                 <td align="center">
-                    <div th:each="auth : *{authorities}" th:object="${auth}">
                         <input type="radio"
                                th:name="${'authority_' + status.index}"
                                th:value="USER"
-                               th:checked="${auth.authority.name == 'USER'}"
+                                th:checked="*{authorities[0].authority.name == 'USER'}"
                                th:id="${'authority_' + status.index + '_USER'}">
                         <label th:for="${'authority_' + status.index + '_USER'}">일반회원</label>
 
                         <input type="radio"
                                th:name="${'authority_' + status.index}"
                                th:value="ADMIN"
-                               th:checked="${auth.authority.name == 'ADMIN'}"
+                               th:checked="*{authorities[0].authority.name == 'ADMIN'}"
                                th:id="${'authority_' + status.index + '_ADMIN'}">
                         <label th:for="${'authority_' + status.index + '_ADMIN'}">관리자</label>
-                    </div>
                 </td>
                 <td>
                     <a th:href="*{@utils.url('/manager/member/edit/' +email)}" class="sbtn on">

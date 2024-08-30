@@ -4,7 +4,11 @@ import lombok.RequiredArgsConstructor;
 
 import org.g9project4.global.Utils;
 import org.g9project4.global.exceptions.script.AlertException;
+import org.g9project4.member.entities.Authorities;
+import org.g9project4.member.entities.AuthoritiesId;
 import org.g9project4.member.entities.Member;
+import org.g9project4.member.entities.QAuthorities;
+import org.g9project4.member.repositories.AuthoritiesRepository;
 import org.g9project4.member.repositories.MemberRepository;
 import org.g9project4.member.services.MemberInfoService;
 import org.springframework.http.HttpStatus;
@@ -20,8 +24,14 @@ import java.util.Optional;
 public class MemberConfigDeleteService {
     private final MemberRepository memberRepository;
     private final AllMemberConfigInfoService memberConfigInfoService;
+    private final AuthoritiesRepository authoritiesRepository;
     private final Utils utils;
     public void delete(String email){
+        QAuthorities authorities = QAuthorities.authorities;
+        List<Authorities> items = (List<Authorities>)authoritiesRepository.findAll(authorities.member.email.eq(email));
+        List<AuthoritiesId> ids = items.stream().map(s -> new AuthoritiesId(s.getMember(), s.getAuthority())).toList();
+        authoritiesRepository.deleteAllById(ids);
+        authoritiesRepository.flush();
         Member member = memberConfigInfoService.get(email);
         if (member == null) {
             throw new AlertException("회원이 존재하지 않습니다.", HttpStatus.NOT_FOUND);
