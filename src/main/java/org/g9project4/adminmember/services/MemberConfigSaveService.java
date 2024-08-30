@@ -8,6 +8,7 @@ import org.g9project4.member.constants.Authority;
 import org.g9project4.member.entities.Authorities;
 import org.g9project4.member.entities.AuthoritiesId;
 import org.g9project4.member.entities.Member;
+import org.g9project4.member.entities.QAuthorities;
 import org.g9project4.member.repositories.AuthoritiesRepository;
 import org.g9project4.member.repositories.MemberRepository;
 import org.g9project4.member.services.MemberSaveService;
@@ -67,9 +68,25 @@ public class MemberConfigSaveService {
             throw new AlertException("수정할 회원을 선택하세요.", HttpStatus.BAD_REQUEST);
         }
 
+        QAuthorities authorities = QAuthorities.authorities;
         for (int chk : chks) {
             String userEmail = utils.getParam("email_" + chk);
+            Authority authority = Authority.valueOf(utils.getParam("authority_" + chk));
+            Member member = memberRepository.findByEmail(userEmail).orElse(null);
+            if (member == null) continue;
 
+            List<Authorities> items = (List<Authorities>)authoritiesRepository.findAll(authorities.member.seq.eq(member.getSeq()));
+            List<AuthoritiesId> ids = items.stream().map(s -> new AuthoritiesId(s.getMember(), s.getAuthority())).toList();
+            authoritiesRepository.deleteAllById(ids);
+            authoritiesRepository.flush();
+            System.out.println("items:" + items);
+            Authorities item = Authorities.builder()
+                    .member(member)
+                    .authority(authority)
+                    .build();
+            authoritiesRepository.saveAndFlush(item);
+        }
+        /*
             Member member = memberRepository.findByEmail(userEmail)
                     .orElseThrow(() -> new AlertException("해당 이메일의 회원을 찾을 수 없습니다.", HttpStatus.NOT_FOUND));
 
@@ -104,5 +121,7 @@ public class MemberConfigSaveService {
 
         // 모든 수정된 사항을 데이터베이스에 반영
         //memberRepository.flush();
+             */
+
     }
 }

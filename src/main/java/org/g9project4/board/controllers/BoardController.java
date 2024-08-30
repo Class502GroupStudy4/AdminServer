@@ -155,6 +155,12 @@ public class BoardController implements ExceptionProcessor {
         return "redirect:" + utils.redirectUrl("/board");
     }
 
+    @PostMapping("/save2")
+    public String save2(){
+        configSaveService.Basicsave();
+        return "redirect:" + utils.redirectUrl("/board");
+    }
+
     /**
      * 게시글 관리
      *
