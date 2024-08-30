@@ -100,6 +100,7 @@ public class Board extends BaseMemberEntity {
     @Transient
     private List<FileInfo> htmlBottomImages; // 게시판 하단 Bottom 이미지
 
+
     /**
      * 분류 List 형태로 변환
      *
