@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.g9project4.board.controllers.BoardDataSearch;
+import org.g9project4.board.entities.Board;
 import org.g9project4.board.entities.BoardData;
 import org.g9project4.global.ListData;
 import org.g9project4.global.Utils;
@@ -98,5 +99,6 @@ public class BoardInfoService {
         return getList(search);
     }
     public ListData<BoardData> getList(String bid){return getList(bid,new BoardDataSearch());}
+
 
 }

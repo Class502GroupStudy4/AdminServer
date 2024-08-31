@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.bouncycastle.math.raw.Mod;
 import org.g9project4.adminmember.constants.Authority;
+import org.g9project4.adminmember.services.AllMemberConfigInfoService;
 import org.g9project4.adminmember.services.MemberConfigDeleteService;
 import org.g9project4.adminmember.services.MemberConfigSaveService;
 import org.g9project4.board.services.BoardConfigDeleteService;
@@ -28,6 +29,7 @@ import java.util.Objects;
 @RequestMapping("/manager/member")
 @RequiredArgsConstructor
 public class AdminMemberController implements ExceptionProcessor {
+    private final AllMemberConfigInfoService memberConfigInfoService;
 
     private final MemberInfoService infoService;
     private final MemberConfigSaveService memberConfigSaveService;
@@ -63,6 +65,8 @@ public class AdminMemberController implements ExceptionProcessor {
             model.addAttribute("items", searchResults);
         }else {
             ListData<Member> data = infoService.getList(search);
+            List<Member> items = data.getItems();
+            model.addAttribute("items", items);
 
             model.addAttribute("items", data.getItems()); // 목록
             model.addAttribute("pagination", data.getPagination()); // 페이징
@@ -72,9 +76,10 @@ public class AdminMemberController implements ExceptionProcessor {
     }
 
     @GetMapping("/edit/{email}")
-    public String edit(@PathVariable("email") String email, Model model) {
+    public String edit(@PathVariable("email") String email,@ModelAttribute RequestMember form, Model model) {
         commonProcess("edit", model);
-        RequestMember form = infoService.getForm(email);
+        form = memberConfigInfoService.getForm(email);
+        form.setAuthorities(form.getAuthorities());
         model.addAttribute("requestMember", form);
         return "adminMember/member/edit";
     }
@@ -85,7 +90,7 @@ public class AdminMemberController implements ExceptionProcessor {
         String mode = form.getMode();
         commonProcess(mode, model);
         if (errors.hasErrors()) {
-            errors.getAllErrors().stream().forEach(System.out::println);
+            errors.getAllErrors().forEach(System.out::println);
             return "adminMember/member/" + mode;
         }
         memberConfigSaveService.save(form);

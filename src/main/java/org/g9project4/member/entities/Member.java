@@ -1,5 +1,6 @@
 package org.g9project4.member.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -15,8 +16,9 @@ import java.util.List;
 @Entity
 @Builder
 @NoArgsConstructor @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Member extends BaseEntity implements Serializable {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long seq;
     @Column(length = 45, nullable = false)
     private String gid;
@@ -51,12 +53,11 @@ public class Member extends BaseEntity implements Serializable {
 
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private  List<Authorities> authorities;
-
+    @OneToMany(mappedBy = "member")
+    private List<Authorities> authorities;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     @Size(max = 5, message = "A member can have a maximum of 5 interests.")
     private List<Interests> interests;
     // 관심사 (맛집 | 호캉스 | 박물관 | 캠핑 | 등산 | 자연 | 예술 | 강/바다 | 아이와 함께 | 온가족 함께 | 연인과 함께 | 낚시)

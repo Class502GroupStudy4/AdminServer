@@ -155,6 +155,7 @@ public class BoardController implements ExceptionProcessor {
         return "redirect:" + utils.redirectUrl("/board");
     }
 
+
     /**
      * 게시글 관리
      *

@@ -87,4 +87,7 @@ public class BoardConfigSaveService {
 
         boardRepository.flush();
     }
+
+
+
 }
