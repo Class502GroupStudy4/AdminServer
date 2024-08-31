@@ -82,7 +82,7 @@ public class ApiUpdateService {
                                 .latitude(item.getMapy())
                                 .longitude(item.getMapx())
                                 .mapLevel(item.getMlevel())
-                                .sigunguCode(item.getSigungucode())
+                                .sigunguCode(item.getSigungucode().toString())
                                 .build();
                         tourPlaceRepository.saveAndFlush(tourPlace);
                     } catch (Exception e) {//예외 발생하면 이미 등록된 여행지
@@ -121,7 +121,7 @@ public class ApiUpdateService {
                                 .firstImage(item.getMainimage())
                                 .cpyrhtDivCd(item.getCpyrhtDivCd())
                                 .modifiedTime(item.getModifiedtime())
-                                .sigunguCode(item.getSigungucode())
+                                .sigunguCode(item.getSigungucode().toString())
                                 .tel(item.getTel())
                                 .title(item.getTitle())
                                 .build();

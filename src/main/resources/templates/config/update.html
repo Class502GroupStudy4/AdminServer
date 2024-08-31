@@ -47,18 +47,9 @@
                 </td>
             </tr>
             <tr>
-                <th width="180">지역코드 정보</th>
+                <th width="180">지역 코드/시군구 코드 정보</th>
                 <td>
-                    <form name="greenApiUpdate" method="post" th:action="${@utils.redirectUrl('/config/api/update/areaCode')}">
-                        <button type="submit" class="btn">업데이트</button>
-                    </form>
-                </td>
-            </tr>
-            <tr>
-                <th width="180">시군구코드 정보</th>
-                <td>
-                    <form name="greenApiUpdate" method="post"
-                          th:action="${@utils.redirectUrl('/config/api/update/sigunguCode')}">
+                    <form name="areaCodeUpdate" method="post" th:action="${@utils.redirectUrl('/config/api/update/areaCode')}">
                         <button type="submit" class="btn">업데이트</button>
                     </form>
                 </td>
@@ -66,7 +57,47 @@
             <tr>
                 <th width="180">카테고리 정보</th>
                 <td>
-                    <form name="greenApiUpdate" method="post" th:action="${@utils.redirectUrl('/config/api/update/categories')}">
+                    <form name="categoryUpdate" method="post" th:action="${@utils.redirectUrl('/config/api/update/categories')}">
+                        <button type="submit" class="btn">업데이트</button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <th width="180">시도 방문 정보</th>
+                <td>
+                    <form name="" method="post" th:action="${@utils.redirectUrl('/config/api/update/sidovisit')}">
+                        <button type="submit" class="btn">업데이트</button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <th width="180">시군구 방문 정보</th>
+                <td>
+                    <form name="greenApiUpdate" method="post" th:action="${@utils.redirectUrl('/config/api/update/sigunguVisit')}">
+                        <button type="submit" class="btn">업데이트</button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <th width="180">테이블 정보</th>
+                <td>
+                    <form name="greenApiUpdate" method="post" th:action="${@utils.redirectUrl('/config/api/update/table')}">
+                        <button type="submit" class="btn">업데이트</button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <th width="180">방문 업데이트 정보</th>
+                <td>
+                    <form name="greenApiUpdate" method="post" th:action="${@utils.redirectUrl('/config/api/update/visitUpdate')}">
+                        <button type="submit" class="btn">업데이트</button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <th width="180">포인트 정보</th>
+                <td>
+                    <form name="greenApiUpdate" method="post" th:action="${@utils.redirectUrl('/config/api/update/point')}">
                         <button type="submit" class="btn">업데이트</button>
                     </form>
                 </td>

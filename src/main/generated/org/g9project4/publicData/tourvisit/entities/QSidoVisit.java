@@ -1,4 +1,4 @@
-package org.g9project4.publicData.tour.entities;
+package org.g9project4.publicData.tourvisit.entities;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -10,67 +10,29 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * QTourPlace is a Querydsl query type for TourPlace
+ * QSidoVisit is a Querydsl query type for SidoVisit
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QTourPlace extends EntityPathBase<TourPlace> {
+public class QSidoVisit extends EntityPathBase<SidoVisit> {
 
-    private static final long serialVersionUID = 1713343668L;
+    private static final long serialVersionUID = 1010961884L;
 
-    public static final QTourPlace tourPlace = new QTourPlace("tourPlace");
+    public static final QSidoVisit sidoVisit = new QSidoVisit("sidoVisit");
 
     public final org.g9project4.global.entities.QBaseEntity _super = new org.g9project4.global.entities.QBaseEntity(this);
 
-    public final StringPath address = createString("address");
-
     public final StringPath areaCode = createString("areaCode");
 
-    public final BooleanPath bookTour = createBoolean("bookTour");
-
-    public final StringPath category1 = createString("category1");
-
-    public final StringPath category2 = createString("category2");
-
-    public final StringPath category3 = createString("category3");
-
-    public final NumberPath<Long> contentId = createNumber("contentId", Long.class);
-
-    public final NumberPath<Long> contentTypeId = createNumber("contentTypeId", Long.class);
-
-    public final StringPath cpyrhtDivCd = createString("cpyrhtDivCd");
+    public final StringPath areaName = createString("areaName");
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
-    public final DateTimePath<java.time.LocalDateTime> createdTime = createDateTime("createdTime", java.time.LocalDateTime.class);
-
     //inherited
     public final DateTimePath<java.time.LocalDateTime> deletedAt = _super.deletedAt;
 
-    public final NumberPath<Double> distance = createNumber("distance", Double.class);
-
-    public final StringPath firstImage = createString("firstImage");
-
-    public final StringPath firstImage2 = createString("firstImage2");
-
-    public final NumberPath<Double> latitude = createNumber("latitude", Double.class);
-
-    public final NumberPath<Double> longitude = createNumber("longitude", Double.class);
-
-    public final NumberPath<Integer> mapLevel = createNumber("mapLevel", Integer.class);
-
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifiedAt = _super.modifiedAt;
-
-    public final DateTimePath<java.time.LocalDateTime> modifiedTime = createDateTime("modifiedTime", java.time.LocalDateTime.class);
-
-    public final NumberPath<Integer> placePointValue = createNumber("placePointValue", Integer.class);
-
-    public final StringPath sigunguCode = createString("sigunguCode");
-
-    public final StringPath tel = createString("tel");
-
-    public final StringPath title = createString("title");
 
     public final NumberPath<Double> type1D1 = createNumber("type1D1", Double.class);
 
@@ -108,16 +70,16 @@ public class QTourPlace extends EntityPathBase<TourPlace> {
 
     public final NumberPath<Double> type3Y1 = createNumber("type3Y1", Double.class);
 
-    public QTourPlace(String variable) {
-        super(TourPlace.class, forVariable(variable));
+    public QSidoVisit(String variable) {
+        super(SidoVisit.class, forVariable(variable));
     }
 
-    public QTourPlace(Path<? extends TourPlace> path) {
+    public QSidoVisit(Path<? extends SidoVisit> path) {
         super(path.getType(), path.getMetadata());
     }
 
-    public QTourPlace(PathMetadata metadata) {
-        super(TourPlace.class, metadata);
+    public QSidoVisit(PathMetadata metadata) {
+        super(SidoVisit.class, metadata);
     }
 
 }
