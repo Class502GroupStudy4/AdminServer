@@ -50,13 +50,18 @@ public class Utils { // 빈의 이름 - utils
         }
     }
 
-    public String redirectUrl(String url) {
+    public String redirectUrl(String url) { //게이트웨이를 통해 접속할 때 url주소
         String _fromGateway = Objects.requireNonNullElse(request.getHeader("from-gateway"), "false");
         String gatewayHost = Objects.requireNonNullElse(request.getHeader("gateway-host"), "");
         boolean fromGateway = _fromGateway.equals("true");
 
+        if (gatewayHost.equals("@http_host")) {
+            gatewayHost = "maratanghuru.xyz";
+        }
+
         return fromGateway ? request.getScheme() + "://" + gatewayHost + "/admin" + url : request.getContextPath() + url;
     }
+
 
     public String frontUrl(String url) {
         List<ServiceInstance> instances = discoveryClient.getInstances("front-service");
