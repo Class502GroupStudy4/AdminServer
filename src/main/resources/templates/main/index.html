@@ -63,7 +63,7 @@
                         <td th:text="${item.subject}" align="center"></td>
                         <td th:text="${item.poster}" align="center"></td>
                         <td align="center">
-                            <a th:href="@{http://localhost:3001/board/list/qna}" class="sbtn">
+                            <a th:href="${@utils.redirectUrl(/board/list/qna)}" class="sbtn">
                                 <i class="xi-pen"></i> 게시글 답하러가기
                             </a>
                         </td>
