@@ -44,9 +44,9 @@ public class ApiUpdateService {
      * @param sKey
      */
     public void update(String sKey) {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 6; i++) {
 
-            String url = String.format("https://apis.data.go.kr/B551011/KorService1/areaBasedList1?MobileOS=AND&MobileApp=test&numOfRows=1000&pageNo=%d&serviceKey=%s&_type=json", i, sKey);
+            String url = String.format("https://apis.data.go.kr/B551011/KorService1/areaBasedList1?MobileOS=AND&MobileApp=test&numOfRows=10000&pageNo=%d&serviceKey=%s&_type=json", i, sKey);
 
             ResponseEntity<ApiResult> response = null;
             try {
